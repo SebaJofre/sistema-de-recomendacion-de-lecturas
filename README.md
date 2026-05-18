@@ -24,18 +24,18 @@ Tras analizar la base de datos, se han identificado diversos errores que afectan
 - **Ratings**: No se encontraron calificaciones mayores a 5 o menores a 0 en los datos correctamente alineados.
 - **Páginas**: No se detectaron libros con número de páginas negativo.
 4. Se procede a definir los tipo de datos de cada campo:
-  bookID TEXTO
-  title	authors TEXTO
-  average_rating NUMBER
-  isbn TEXTO
-  isbn13 TEXTO
-  language_code TEXTO
-  num_pages NUMBER
-  ratings_count NUMBER
-  text_reviews_count NUMBER
-  publication_date DATE (AAAA-MM-DD)
-  publisher TEXT
+  - bookID: TEXTO
+  - title	authors: TEXTO
+  - average_rating: NUMBER
+  - isbn: TEXTO
+  - isbn13: TEXTO
+  - language_code: TEXTO
+  - num_pages: NUMBER
+  - ratings_count: NUMBER
+  - text_reviews_count: NUMBER
+  - publication_date: DATE (FORMATO: AAAA-MM-DD)
+  - publisher; TEXT
 
   Se guarda el archivo en formato .csv para luego trabajarlo en PostgreSQL
 
-  
+  ### 2. ALMACENAMIENTO Y ANÁLISIS EXPLORATORIO EN POSTGRESQL
