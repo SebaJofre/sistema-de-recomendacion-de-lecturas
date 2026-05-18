@@ -61,6 +61,51 @@ Las queries pueden ser consultadas en la carpeta [sql_queries](./sql_queries)
 - [4. Fase 4: Transformación transaccional y capa de abstracción.](#4-fase-4-transformación-transaccional-y-capa-de-abstracción)
 
 ### 1. Fase 1: Definición del esquema DDL y Refactorización
+Se comienza esta fase con la creación del database `books`. Luego, se procede a la creación de la tabla `db_books`, asignando las restricciones correspondientes a cada campo.
+Al definir la estructura inicial, se establecieron restricciones estándar como `VARCHAR(255)` y `VARCHAR(30)` para los campos `authors` y `publisher` respectivamente, basados en una primera lectura preliminar
+
+*Error:* Durante las importaciones del dataset, el pipeline colapsó debido al desbordamiento de longitud de caracteres. El dataset contenía listas extensas de coautores y nombres de editoriales complejas que superaban los límites previstos.
+
+*Solución:* Se aplica una reingeniería de esquema mendiante la sentencia `ALTER TABLE`, modificando los campos a tipo `TEXT`. Esto elima el límite arbitrario de caracteres, optimiza la gestión de almacenamiento dinámico de PostgreSQL y blinda el pipeline contra futuras cargas de datos variables.
+
+```sql
+-- ==========================================================================================
+-- PASO 1: DEFINICIÓN DEL ESQUEMA DE LA BASE DE DATOS
+-- DESCRIPTION: CREACION DEL ESQUEMA DE LA BASES DE DATOS Y MODIFICACIONES ESTRUCTURALES.
+-- ==========================================================================================
+
+-- 1. Create the DATABASE.
+-- CREATE DATABASE books;
+
+-- 2. CREAR LA TABLA CON RESTRICCIONES ESTRICTAS Y DEFINICIÓN DE LA PRIMARY KEY.
+
+CREATE TABLE db_books (
+    bookID INT PRIMARY KEY,
+    title TEXT NOT NULL,
+    authors VARCHAR(255), -- Restricción inicial
+    avg_rating DECIMAL(3,2),
+    isbn VARCHAR(20),
+    isbn13 VARCHAR(20),
+    language_code VARCHAR(10),
+    num_pages INT,
+    rating_counts BIGINT,
+    text_review_counts INT,
+    publication_date DATE,
+    publisher VARCHAR(30)  -- Restricción inicial
+);
+
+-- 3. REFACTORIZACIÓN Y OPTIMIZACIÓN DE ESQUEMAS.
+-- Al cargar los datos desde el formato .csv, se detecta que los campos 'authors' y 'publisher' excedían los limites de longitud.
+-- Se modifica a tipo 'TEXT' para evitar la saturación de la memoria y poder cargar los datos.
+
+ALTER TABLE db_books
+ALTER COLUMN authors TYPE TEXT;
+
+ALTER TABLE db_books
+ALTER COLUMN publisher TYPE TEXT;
+```
+
+
 ### 2. Fase 2: Pipeline de ingesta masiva
 ### 3. Fase 3: Auditoría de Calidad y Detección de anomalías
 ### 4. Fase 4: Transformación transaccional y capa de abstracción
