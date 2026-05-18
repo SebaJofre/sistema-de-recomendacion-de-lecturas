@@ -1,5 +1,11 @@
 # 📚SISTEMA DE RECOMENDACIÓN DE LECTURA📚
 
+## ÍNDICE DEL PROYECTO
+
+- [OBJETIVO DEL PROYECTO](#objetivo-del-proyecto)
+- [HERRAMIENTAS UTILIZADAS](#herramientas-utilizadas)
+- 
+
 ## OBJETIVO DEL PROYECTO
 Optimizar el proceso de selección de lecturas mediante un modelo de priorización basado en datos históricos, calificaciones de usuarios, cantidad de páginas y editoral.
 
