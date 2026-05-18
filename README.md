@@ -38,11 +38,17 @@ Tras analizar la base de datos, se han identificado diversos errores que afectan
 
   Se guarda el archivo en formato `.csv` para luego trabajarlo en PostgreSQL
 
-  ### 2. ARQUITECTURA DE DATOS Y MODELOS RELACIONALES (**PostgreSQL**).
+  ### 2. ARQUITECTURA, INGESTA Y GOBERNANZA DE DATOS (**PostgreSQL**).
 
-Para garantizar la escalabilidad del proyecto, la centralización de las consultas y evitar la volatilidad de trabajar con archivos planos, se estructuró un modelo relacional en **PostgreSQL**.
+Se realiza el registro del backend de datos para el proyecto. Se detalla el diseño del esquema, los errores críticos de infraestructura detectados durante la ingesta, las auditorías de calidad de datos (QA) y las estrategias transaccionales aplicadas para garantizar la fidelidad de los reportes.
 
-#### **Aspectos Técnicos Destacados:**
-* **Optimización de Tipos de Datos:** Se previnieron errores críticos de desbordamiento de búfer (buffer overflow) mediante la alteración dinámica de restricciones (`ALTER TABLE`), modificando campos de longitud variable como `authors` y `publisher` a tipo `TEXT`.
-* **Pipeline de Ingesta Eficiente:** Se implementaron protocolos de carga masiva (`COPY`) optimizados para rendimiento en servidores, asegurando la consistencia en el encoding (`UTF8`).
+### ÍNDICE DEL PIPELINE
+- **1. Fase 1: Definición del esquema DDL y Refactorización.**
+- **2. Fase 2: Pipeline de ingesta masiva.**
+- **3. Fase 3: Auditoría de Calidad y Detección de anomalías.**
+- **4. Fase 4: Transformación transaccional y capa de abstracción.**
+
+
+
+
 
