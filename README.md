@@ -11,3 +11,6 @@ Para este proyecto se usó:
 
 ## ORIGEN DE LOS DATOS
 El dataset utilizado en este proyecto fue obtenido de Kaggle: https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks?resource=download
+
+### 1. Limpieza y Extracción de Datos en Google Sheets
+
