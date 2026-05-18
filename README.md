@@ -107,7 +107,48 @@ ALTER COLUMN publisher TYPE TEXT;
 
 
 ### 2. Fase 2: Pipeline de ingesta masiva
+
+Luego del arreglo del error mencionado en la fase 1, se procede a la carga del dataset.
+
+Para la carga del conjunto de datos preprocesado en Google Sheets, se optó por una estrategia de carga masiva integrada (`Bulk Load`) aprovechando la arquitectura local del servidor de base de datos. 
+
+Al encontrarse el archivo `.csv` limpio y el motor PostgreSQL en el mismo entorno de desarrollo local, el uso del comando nativo `COPY` representa la solución óptima y de mayor velocidad de procesamiento, evitando la sobrecarga de transferencias por red o inserciones línea por línea (`INSERT INTO`)
+
+```sql
+-- ==========================================================================================
+-- PASO 2: PIPELINE DE INGESTA DE DATOS
+-- DESCRIPTION: INGESTA MASIVA DEL DATASET DE LIBROS PREPROCESADOS EN FORMATO .csv.
+-- ==========================================================================================
+
+-- El archivo origen ha pasado por una fase previa de auditoría y limpieza en 
+-- Google Sheets para garantizar que los delimitadores y encodigs no rompan la ingesta.
+
+COPY db_books (
+    bookID, 
+    title, 
+    authors, 
+    avg_rating, 
+    isbn, 
+    isbn13, 
+    language_code, 
+    num_pages, 
+    rating_counts, 
+    text_review_counts, 
+    publication_date, 
+    publisher
+)
+FROM 'G:/My Drive/Data Analysis/Portfolio/Proyecto 1 - Books/Dataset/books_clean.csv'
+WITH (
+    FORMAT CSV, 
+    HEADER true, 
+    DELIMITER ',', 
+    ENCODING 'UTF8'
+);
+
+```
 ### 3. Fase 3: Auditoría de Calidad y Detección de anomalías
+
+
 ### 4. Fase 4: Transformación transaccional y capa de abstracción
 
 
