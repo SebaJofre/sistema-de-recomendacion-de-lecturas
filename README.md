@@ -47,12 +47,17 @@ Se realiza el registro del backend de datos para el proyecto. Se detalla el dise
 Las queries pueden ser consultadas en la carpeta ``sql_queries``
 
 ### ÍNDICE DEL PIPELINE
-- **1. Fase 1: Definición del esquema DDL y Refactorización.**
-- **2. Fase 2: Pipeline de ingesta masiva.**
-- **3. Fase 3: Auditoría de Calidad y Detección de anomalías.**
-- **4. Fase 4: Transformación transaccional y capa de abstracción.**
+- **[1. Fase 1: Definición del esquema DDL y Refactorización.](#1-fase-1-definición-del-esquema-ddl-y-refactorización)**
+- **[2. Fase 2: Pipeline de ingesta masiva.](#2-fase-2-pipeline-de-ingesta-masiva)**
+- **[3. Fase 3: Auditoría de Calidad y Detección de anomalías.](#3-fase-3-auditoría-de-calidad-y-detección-de-anomalías)**
+- **[4. Fase 4: Transformación transaccional y capa de abstracción.](#4-fase-4-transformación-transaccional-y-capa-de-abstracción)**
 
+**1. Fase 1: Definición del esquema DDL y Refactorización.**
 
+**2. Fase 2: Pipeline de ingesta masiva.**
 
+**3. Fase 3: Auditoría de Calidad y Detección de anomalías.**
+
+**4. Fase 4: Transformación transaccional y capa de abstracción.**
 
 
