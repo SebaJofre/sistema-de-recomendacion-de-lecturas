@@ -1,7 +1,7 @@
 # 📚SISTEMA DE RECOMENDACIÓN DE LECTURA📚
 
 ## OBJETIVO DEL PROYECTO
-Optimizar el proceso de selección de lecturas mediante un modelo de priorización basado en datos históricos, calificaciones de usuarios y segmentación por géneros.
+Optimizar el proceso de selección de lecturas mediante un modelo de priorización basado en datos históricos, calificaciones de usuarios, cantidad de páginas y editoral.
 
 ## HERRAMIENTAS UTILIZADAS
 Para este proyecto se usó:
@@ -42,6 +42,7 @@ Tras analizar la base de datos, se han identificado diversos errores que afectan
 
 Para garantizar la escalabilidad del proyecto, la centralización de las consultas y evitar la volatilidad de trabajar con archivos planos, se estructuró un modelo relacional en **PostgreSQL**.
 
-### Aspectos Técnicos Destacados:
+#### **Aspectos Técnicos Destacados:**
 * **Optimización de Tipos de Datos:** Se previnieron errores críticos de desbordamiento de búfer (buffer overflow) mediante la alteración dinámica de restricciones (`ALTER TABLE`), modificando campos de longitud variable como `authors` y `publisher` a tipo `TEXT`.
 * **Pipeline de Ingesta Eficiente:** Se implementaron protocolos de carga masiva (`COPY`) optimizados para rendimiento en servidores, asegurando la consistencia en el encoding (`UTF8`).
+
