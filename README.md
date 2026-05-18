@@ -14,7 +14,7 @@ El dataset utilizado en este proyecto fue obtenido de `Kaggle`: https://www.kagg
 
 ### 1. Limpieza y Extracción de Datos (**Google Sheets**).
 
-En esta parte se procesaron los datos crudos. Se pueden consultar los datos en la carpeta `data`.
+En esta parte se procesaron los datos crudos. Se pueden consultar los datos en la carpeta [data](./data)
 
 Tras analizar la base de datos, se han identificado diversos errores que afectan la integridad de los datos. El problema principal radica en una desalineación de columnas en ciertos registros, además de fechas con días inexistentes.
 
@@ -44,7 +44,7 @@ Tras analizar la base de datos, se han identificado diversos errores que afectan
 
 Se realiza el registro del backend de datos para el proyecto. Se detalla el diseño del esquema, los errores críticos de infraestructura detectados durante la ingesta, las auditorías de calidad de datos (QA) y las estrategias transaccionales aplicadas para garantizar la fidelidad de los reportes.
 
-Las queries pueden ser consultadas en la carpeta ``sql_queries``
+Las queries pueden ser consultadas en la carpeta [sql_queries](./sql_queries)
 
 ### ÍNDICE DEL PIPELINE
 - [1. Fase 1: Definición del esquema DDL y Refactorización.](#1-fase-1-definición-del-esquema-ddl-y-refactorización)
