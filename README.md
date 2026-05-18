@@ -14,6 +14,8 @@ El dataset utilizado en este proyecto fue obtenido de `Kaggle`: https://www.kagg
 
 ### 1. Limpieza y Extracción de Datos (**Google Sheets**).
 
+En esta parte se procesaron los datos crudos. Se pueden consultar los datos en la carpeta `data`.
+
 Tras analizar la base de datos, se han identificado diversos errores que afectan la integridad de los datos. El problema principal radica en una desalineación de columnas en ciertos registros, además de fechas con días inexistentes.
 
 1. Se corrigen 4 registros donde el contenido de las celdas se desplazó hacia la derecha (0.035% del total de la muestra).
@@ -41,6 +43,8 @@ Tras analizar la base de datos, se han identificado diversos errores que afectan
   ### 2. ARQUITECTURA, INGESTA Y GOBERNANZA DE DATOS (**PostgreSQL**).
 
 Se realiza el registro del backend de datos para el proyecto. Se detalla el diseño del esquema, los errores críticos de infraestructura detectados durante la ingesta, las auditorías de calidad de datos (QA) y las estrategias transaccionales aplicadas para garantizar la fidelidad de los reportes.
+
+Las queries pueden ser consultadas en la carpeta ``sql_queries``
 
 ### ÍNDICE DEL PIPELINE
 - **1. Fase 1: Definición del esquema DDL y Refactorización.**
