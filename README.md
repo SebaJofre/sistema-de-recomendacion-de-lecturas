@@ -12,7 +12,7 @@ Para este proyecto se usó:
 ## ORIGEN DE LOS DATOS
 El dataset utilizado en este proyecto fue obtenido de Kaggle: https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks?resource=download
 
-### 1. Limpieza y Extracción de Datos en Google Sheets
+### 1. Limpieza y Extracción de Datos (Google Sheets).
 
 Tras analizar la base de datos, se han identificado diversos errores que afectan la integridad de los datos. El problema principal radica en una desalineación de columnas en ciertos registros, además de fechas con días inexistentes.
 
@@ -38,4 +38,6 @@ Tras analizar la base de datos, se han identificado diversos errores que afectan
 
   Se guarda el archivo en formato .csv para luego trabajarlo en PostgreSQL
 
-  ### 2. ALMACENAMIENTO Y ANÁLISIS EXPLORATORIO EN POSTGRESQL
+  ### 2. ARQUITECTURA DE DATOS Y MODELOS RELACIONALES (PostgreSQL).
+
+  
