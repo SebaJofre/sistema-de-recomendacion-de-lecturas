@@ -11,7 +11,7 @@
 CREATE TABLE db_books (
     bookID INT PRIMARY KEY,
     title TEXT NOT NULL,
-    authors VARCHAR(255),
+    authors VARCHAR(255), -- Restricción inicial
     avg_rating DECIMAL(3,2),
     isbn VARCHAR(20),
     isbn13 VARCHAR(20),
@@ -20,7 +20,7 @@ CREATE TABLE db_books (
     rating_counts BIGINT,
     text_review_counts INT,
     publication_date DATE,
-    publisher VARCHAR(30)  -- Initial constraint for data restriction demo
+    publisher VARCHAR(30)  -- Restricción inicial
 );
 
 -- 3. REFACTORIZACIÓN Y OPTIMIZACIÓN DE ESQUEMAS.
