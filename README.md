@@ -5,14 +5,14 @@ Optimizar el proceso de selección de lecturas mediante un modelo de priorizaci�
 
 ## HERRAMIENTAS UTILIZADAS
 Para este proyecto se usó:
-1. Google Sheets para la Limpieza y Extracción de Datos.
-2. PostgreSQL para el armado de tablas y creación de consultas.
-3. Power BI para la visualización y presentación de datos.
+1. **Google Sheets** para la Limpieza y Extracción de Datos.
+2. **PostgreSQL** para el armado de tablas y creación de consultas.
+3. **Power BI** para la visualización y presentación de datos.
 
 ## ORIGEN DE LOS DATOS
-El dataset utilizado en este proyecto fue obtenido de Kaggle: https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks?resource=download
+El dataset utilizado en este proyecto fue obtenido de `Kaggle`: https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks?resource=download
 
-### 1. Limpieza y Extracción de Datos (Google Sheets).
+### 1. Limpieza y Extracción de Datos (**Google Sheets**).
 
 Tras analizar la base de datos, se han identificado diversos errores que afectan la integridad de los datos. El problema principal radica en una desalineación de columnas en ciertos registros, además de fechas con días inexistentes.
 
@@ -24,20 +24,24 @@ Tras analizar la base de datos, se han identificado diversos errores que afectan
 - **Ratings**: No se encontraron calificaciones mayores a 5 o menores a 0 en los datos correctamente alineados.
 - **Páginas**: No se detectaron libros con número de páginas negativo.
 4. Se procede a definir los tipo de datos de cada campo:
-  - bookID: TEXTO
-  - title	authors: TEXTO
-  - average_rating: NUMBER
-  - isbn: TEXTO
-  - isbn13: TEXTO
-  - language_code: TEXTO
-  - num_pages: NUMBER
-  - ratings_count: NUMBER
-  - text_reviews_count: NUMBER
-  - publication_date: DATE (FORMATO: AAAA-MM-DD)
-  - publisher; TEXT
+  - bookID: `TEXT`
+  - title	authors: `TEXT`
+  - average_rating: `NUMBER`
+  - isbn: `TEXT`
+  - isbn13: `TEXT`
+  - language_code: `TEXT`
+  - num_pages: `NUMBER`
+  - ratings_count: `NUMBER`
+  - text_reviews_count: `NUMBER`
+  - publication_date: `DATE` (FORMATO: AAAA-MM-DD)
+  - publisher; `TEXT`
 
-  Se guarda el archivo en formato .csv para luego trabajarlo en PostgreSQL
+  Se guarda el archivo en formato `.csv` para luego trabajarlo en PostgreSQL
 
-  ### 2. ARQUITECTURA DE DATOS Y MODELOS RELACIONALES (PostgreSQL).
+  ### 2. ARQUITECTURA DE DATOS Y MODELOS RELACIONALES (**PostgreSQL**).
 
-  
+Para garantizar la escalabilidad del proyecto, la centralización de las consultas y evitar la volatilidad de trabajar con archivos planos, se estructuró un modelo relacional en **PostgreSQL**.
+
+### Aspectos Técnicos Destacados:
+* **Optimización de Tipos de Datos:** Se previnieron errores críticos de desbordamiento de búfer (buffer overflow) mediante la alteración dinámica de restricciones (`ALTER TABLE`), modificando campos de longitud variable como `authors` y `publisher` a tipo `TEXT`.
+* **Pipeline de Ingesta Eficiente:** Se implementaron protocolos de carga masiva (`COPY`) optimizados para rendimiento en servidores, asegurando la consistencia en el encoding (`UTF8`).
