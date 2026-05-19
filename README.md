@@ -233,7 +233,10 @@ WHERE num_pages IS NULL;
 COMMIT;
 ```
 Se realiza una verificación final de la solución implementada para asegurarse que los datos coinciden. Ambas queries devuelven los resultados esperados:
-![Primera comprobacion](G:\My Drive\Data Analysis\Portfolio\Proyecto 1 -  Books\SQL\query_1.jpg)
+
+![Query_1](images/query_1.jpg)
+
+![Query_2](images/query_2.jpg)
 
 La segunda solución consiste en la creación de una `vista` que aisla por completo los registros sin datos (`null`). Esto permite tomar esta base de datos para poder realizar reportes limpios.
 
