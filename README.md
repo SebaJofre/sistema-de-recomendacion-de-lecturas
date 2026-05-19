@@ -74,7 +74,7 @@ Al definir la estructura inicial, se establecieron restricciones estándar como 
 -- DESCRIPCIÓN: CREACION DEL ESQUEMA DE LA BASES DE DATOS Y MODIFICACIONES ESTRUCTURALES.
 -- ==========================================================================================
 
--- 1. Creación de la DATABASE.
+-- 1. CREAR LA DATABASE.
 -- CREATE DATABASE books;
 
 -- 2. CREAR LA TABLA CON RESTRICCIONES ESTRICTAS Y DEFINICIÓN DE LA PRIMARY KEY.
