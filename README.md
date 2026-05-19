@@ -148,8 +148,111 @@ WITH (
 ```
 ### 3. Fase 3: Auditoría de Calidad y Detección de anomalías
 
+Se procede a realizar una auditoría de calidad de la base de datos para determinar si la misma presenta errores y para actuar en caso afirmativo. Esto permite garantizar la calidad de los datos importados.
+
+```sql
+-- ==========================================================================================
+-- PASO 2: GARANTÍA DE CALIDAD DE LOS DATOS (QA) Y CONSULTAS DE AUDITORÍA
+-- DESCRIPTION: COMPROBACIONES DE CALIDAD DE LOS DATOS PARA GARANTIZAR LA INTEGRIDAD DE LOS
+-- LOS MISMOS 
+-- ==========================================================================================
+
+-- 1. Verificación del volumen de ingesta: asegura que el volumen total de filas coincida
+-- con el archivo fuente.
+
+SELECT COUNT(*) AS null_rating_counts
+FROM db_books
+WHERE rating_counts IS NULL;
+
+-- 2. Detección de valores atípicos estructurales: identifica filas potencialmente dañadas
+-- (por ejemplo: cantidad de páginas negativas).
+
+SELECT 
+	MIN(num_pages) AS min_page_count,
+	MAX(num_pages) AS max_page_count,
+	AVG(num_pages) AS avg_page_count
+FROM db_books;
+
+-- Se determina la cantidad de registros con num_pages = 0 (Un total de 76 registros)
+SELECT COUNT(*)
+FROM db_books
+WHERE num_pages = 0;
+
+-- Se analiza el avg_rating de los registros con 0 páginas para ver si son promedios altos
+SELECT bookid,
+		title,
+		avg_rating,
+		num_pages
+FROM db_books
+WHERE num_pages = 0
+ORDER BY avg_rating DESC;
+
+-- Se calcula el promedio de todos los registros con 0 páginas (AVG = 3.925)
+SELECT AVG(avg_rating)
+FROM db_books
+WHERE num_pages = 0;
+
+-- Se define no eliminar los registros ya que implicarían un distorsión del análisis de datos
+-- en el paso 04 se implementan las soluciones elegidas.
+```
+Como detalla la consulta sql, se encontraron un total de 76 registros con el campo `num_pages` igual a 0. Al ser un volumen representativo (0.68% del total de la muestra de datos), eliminar estos registros distorsionaría el análisis de datos posterior, por lo que, se decide implementar otra solución. La misma se explica en la siguiente fase (Fase 4).
 
 ### 4. Fase 4: Transformación transaccional y capa de abstracción
 
+Se decide implementar dos tipos de soluciones para gestionar la anomalía en el campo `num_pages` (libros con 0 páginas).
+
+La primera de ellas consiste en realizar una transformación de datos
+```sql
+-- ==========================================================================================
+-- PASO 4: TRANSFORMACIÓN DE DATOS E IMPLEMENTACIÓN DE ESTRATEGIA.
+-- DESCRIPTION: IMPLEMENTACIÓN DE ESTRATEGIA DE REDUNDANCIA PARA LA GESTIÓN DE ANOMALÍAS 
+-- (LIBROS CON 0 PÁGINAS). SE APLICAN DOS SOLUCIONES EN PARALELO.
+-- ==========================================================================================
+
+-- ESTRATEGIA 1: MUTACIÓN DE LA TABLA (Para análisis de datos en SQL)
+-- Cambiar '0' por 'NULL' asegura que funciones como AVG() ó MEDIAN() no se vean sesgadas en 
+-- la tabla base, manteniendo el registro para análisis de otras variables.
+
+BEGIN TRANSACTION;
+
+UPDATE db_books
+SET num_pages = NULL
+WHERE num_pages = 0;
+
+--Verificaciónes
+
+SELECT COUNT(*) AS registros_con_cero
+FROM db_books
+WHERE num_pages = 0;
+
+SELECT COUNT(*) AS registros_con_null
+FROM db_books
+WHERE num_pages IS NULL;
+
+COMMIT;
+```
+Se realiza una verificación de la solución implementada para asegurarse que los datos coinciden.
+
+La segunda solución consiste en la creación de una `vista` que aisla por completo los registros sin datos (`null`). Esto permite tomar esta base de datos para poder realizar reportes limpios.
+
+```sql
+CREATE VIEW vista_db_books AS 
+SELECT
+	bookID,
+    title,
+    authors,
+    avg_rating,
+    isbn,
+    isbn13,
+    language_code,
+    num_pages,
+    rating_counts,
+    text_review_counts,
+    publication_date,
+    publisher
+FROM db_books
+WHERE num_pages IS NOT NULL; -- Toma la transformación realizada en la Estrategia 1
+```
+Nota: Ambas soluciones permiten realizar análisis de datos mas confiables.
 
 
