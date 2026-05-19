@@ -202,6 +202,7 @@ Como detalla la consulta sql, se encontraron un total de 76 registros con el cam
 Se decide implementar dos tipos de soluciones para gestionar la anomalía en el campo `num_pages` (libros con 0 páginas).
 
 La primera de ellas consiste en realizar una transformación de datos
+
 ```sql
 -- ==========================================================================================
 -- PASO 4: TRANSFORMACIÓN DE DATOS E IMPLEMENTACIÓN DE ESTRATEGIA.
@@ -231,7 +232,8 @@ WHERE num_pages IS NULL;
 
 COMMIT;
 ```
-Se realiza una verificación de la solución implementada para asegurarse que los datos coinciden.
+Se realiza una verificación final de la solución implementada para asegurarse que los datos coinciden. Ambas queries devuelven los resultados esperados:
+![Primera comprobacion](G:\My Drive\Data Analysis\Portfolio\Proyecto 1 -  Books\SQL\query_1.jpg)
 
 La segunda solución consiste en la creación de una `vista` que aisla por completo los registros sin datos (`null`). Esto permite tomar esta base de datos para poder realizar reportes limpios.
 
