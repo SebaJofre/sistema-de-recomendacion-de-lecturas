@@ -71,10 +71,10 @@ Al definir la estructura inicial, se establecieron restricciones estándar como 
 ```sql
 -- ==========================================================================================
 -- PASO 1: DEFINICIÓN DEL ESQUEMA DE LA BASE DE DATOS
--- DESCRIPTION: CREACION DEL ESQUEMA DE LA BASES DE DATOS Y MODIFICACIONES ESTRUCTURALES.
+-- DESCRIPCIÓN: CREACION DEL ESQUEMA DE LA BASES DE DATOS Y MODIFICACIONES ESTRUCTURALES.
 -- ==========================================================================================
 
--- 1. Create the DATABASE.
+-- 1. Creación de la DATABASE.
 -- CREATE DATABASE books;
 
 -- 2. CREAR LA TABLA CON RESTRICCIONES ESTRICTAS Y DEFINICIÓN DE LA PRIMARY KEY.
@@ -105,7 +105,6 @@ ALTER TABLE db_books
 ALTER COLUMN publisher TYPE TEXT;
 ```
 
-
 ### 2. Fase 2: Pipeline de ingesta masiva
 
 Luego del arreglo del error mencionado en la fase 1, se procede a la carga del dataset.
@@ -117,7 +116,7 @@ Al encontrarse el archivo `.csv` limpio y el motor PostgreSQL en el mismo entorn
 ```sql
 -- ==========================================================================================
 -- PASO 2: PIPELINE DE INGESTA DE DATOS
--- DESCRIPTION: INGESTA MASIVA DEL DATASET DE LIBROS PREPROCESADOS EN FORMATO .csv.
+-- DESCRIPCIÓN: INGESTA MASIVA DEL DATASET DE LIBROS PREPROCESADOS EN FORMATO .csv.
 -- ==========================================================================================
 
 -- El archivo origen ha pasado por una fase previa de auditoría y limpieza en 
@@ -153,7 +152,7 @@ Se procede a realizar una auditoría de calidad de la base de datos para determi
 ```sql
 -- ==========================================================================================
 -- PASO 2: GARANTÍA DE CALIDAD DE LOS DATOS (QA) Y CONSULTAS DE AUDITORÍA
--- DESCRIPTION: COMPROBACIONES DE CALIDAD DE LOS DATOS PARA GARANTIZAR LA INTEGRIDAD DE LOS
+-- DESCRIPCIÓN: COMPROBACIONES DE CALIDAD DE LOS DATOS PARA GARANTIZAR LA INTEGRIDAD DE LOS
 -- LOS MISMOS 
 -- ==========================================================================================
 
@@ -206,7 +205,7 @@ La primera de ellas consiste en realizar una transformación de datos
 ```sql
 -- ==========================================================================================
 -- PASO 4: TRANSFORMACIÓN DE DATOS E IMPLEMENTACIÓN DE ESTRATEGIA.
--- DESCRIPTION: IMPLEMENTACIÓN DE ESTRATEGIA DE REDUNDANCIA PARA LA GESTIÓN DE ANOMALÍAS 
+-- DESCRIPCIÓN: IMPLEMENTACIÓN DE ESTRATEGIA DE REDUNDANCIA PARA LA GESTIÓN DE ANOMALÍAS 
 -- (LIBROS CON 0 PÁGINAS). SE APLICAN DOS SOLUCIONES EN PARALELO.
 -- ==========================================================================================
 
