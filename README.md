@@ -259,4 +259,15 @@ WHERE num_pages IS NOT NULL; -- Toma la transformación realizada en la Estrateg
 ```
 Nota: Ambas soluciones permiten realizar análisis de datos mas confiables.
 
+### 5. Fase 5: NORMALIZACIÓN Y CREACIÓN DE NUEVAS TABLAS
+
+Este paso detalla la normalización de la base de datos, debido a que se detecta en la `db_books`, campo `authors` una gran cantidad de autores por cada registro almacena, lo que ensucia y dificulta la creación de consultas.
+
+```sql
+SELECT DISTINCT(authors)
+FROM db_books;
+```
+![query_authors](images/query_authors.jpg)
+
+
 
