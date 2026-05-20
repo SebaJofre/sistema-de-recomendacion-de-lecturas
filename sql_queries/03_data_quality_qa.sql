@@ -1,5 +1,5 @@
 -- ==========================================================================================
--- PASO 2: GARANTÍA DE CALIDAD DE LOS DATOS (QA) Y CONSULTAS DE AUDITORÍA
+-- PASO 3: GARANTÍA DE CALIDAD DE LOS DATOS (QA) Y CONSULTAS DE AUDITORÍA
 -- DESCRIPCIÓN: COMPROBACIONES DE CALIDAD DE LOS DATOS PARA GARANTIZAR LA INTEGRIDAD DE LOS
 -- LOS MISMOS 
 -- ==========================================================================================
