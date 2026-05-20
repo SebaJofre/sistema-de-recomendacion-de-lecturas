@@ -269,5 +269,8 @@ FROM db_books;
 ```
 ![query_authors](images/query_authors.jpg)
 
-
+**Solución:**
+- 1. Se decide tomar el primer autor para cada uno de los registros de la base de datos.
+- 2. Se procede a la creación de las tablas `books`,`authors`,`publishers`,`languages`. Esto nos va a permitir reducir la redundancia en las consultas y mejorar la integridad del sistema.
+		
 
