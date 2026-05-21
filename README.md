@@ -399,7 +399,7 @@ Nota: Se trabajará con las tablas anteriormente creadas.
 
 Una vez normalizadas las bases de datos y con la creación de nuevas tablas, podemos comenzar a generar las `queries` que nos permitan dar respuesta a las siguientes preguntas:
 
-- 1.¿Cuáles son los 10 libros con mejor puntuación de toda la plataforma, mostrando el nombre del autor, su editorial, cantidad de páginas y cantidad de puntuaciones recibidas?
+- 1. ¿Cuáles son los 10 libros con mejor puntuación de toda la plataforma, mostrando el nombre del autor, editorial, puntuación, cantidad de páginas y cantidad de puntuaciones?
 
 ```sql
 -- ==========================================================================================
@@ -432,3 +432,63 @@ LIMIT 10; -- Se toman los 5 primeros registros
 ```
 El resultado de la consulta anterior es el siguiente:
 ![Respuesta_1_A](/images/rta_pregunta_1_A.jpg)
+
+Si analizamos el resultado obtenido, podemos ver que todos los registros de libros devueltos tienen una puntuación de 5 puntos, pero la cantidad de puntuaciones recibidas son bajas. Es por esto que el resultado obtenido no es confiable, ni certero (no se puede tomar un libro como bueno si sólo ha recibido un total de 5 puntuaciones).
+Para poder trabajar con un valor confiable se procede a implementar cálculos estadísticos y funciones de agregación ordenada.
+
+```sql
+-- =================================================================================
+-- QUERIES PARA CÁLCULOS ESTADÍSTICOS (FUNCIONES DE AGREGACIÓN ORDENADA)
+-- =================================================================================
+
+-- QUERY 1: CÁLCULO DEL MIN, MAX Y AVG DE rating_counts 
+
+SELECT 
+	-- 1. Mínima puntuación
+		MIN(avg_rating) AS min_puntuacion,
+	-- 2. Máxima puntuación
+		MAX(avg_rating) AS max_puntuacion,
+FROM books;
+
+-- Comprobamos que no hay valores menores a 0 y mayores a 5
+
+-- QUERY 2: CÁLCULO DEL PROMEDIO, MEDIANA Y PERCENTIL 75.
+
+SELECT 
+    -- 1. El Promedio (Sensible a valores extremos)
+    ROUND(AVG(rating_counts), 2) AS promedio_votos,
+    
+    -- 2. La Mediana (El valor real del centro: 50% de los libros tienen más que esto, 50% tienen menos)
+    PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY rating_counts) AS mediana_votos,
+    
+    -- 3. Percentil 75 (El top 25% de los libros con más votos)
+    PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY rating_counts) AS percentil_75_votos
+FROM books
+WHERE rating_counts > 0; -- Excluimos los que no tienen votos para no desvirtuar
+
+-- Para poder analizar la puntuación de los libros de manera mas eficaz podemos trabajar con la MEDIANA (766) ó con
+-- el PERCENTIL 75 (5061.5).
+-- Se decide trabajar con el Percentil 75.
+```
+Ahora con un dato más confiable podemos dar respuesta a la pregunta 1.
+
+```sql
+-- 1. ¿Cuáles son los 10 libros con mejor puntuación de toda la plataforma,
+-- mostrando el nombre del autor, editorial, puntuación, cantidad de páginas y cantidad de puntuaciones?
+SELECT b.title AS titulo,
+		a.author_name AS autor,
+		p.publisher_name AS editorial,
+		b.avg_rating AS puntuacion,
+		b.num_pages AS cant_de_paginas,
+		b.rating_counts AS cant_de_puntuaciones
+FROM books b
+INNER JOIN authors a  -- Unimos a la tabla authors para traer el nombre del autor
+ON b.author_id = a.author_id 
+INNER JOIN publishers p -- Unimos a la tabla publisher para traer el nombre de la editorial
+ON b.publisher_id = p.publisher_id
+WHERE b.rating_counts > 5061 --Tomamos el percentil 75 
+ORDER BY b.avg_rating DESC
+LIMIT 10;
+```
+![Respuesta_1_B](/images/rta_pregunta_1_B.jpg)
+
