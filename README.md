@@ -409,7 +409,7 @@ Una vez normalizadas las bases de datos y con la creación de nuevas tablas, pod
 -- ==========================================================================================
 
 -- 1. ¿Cuáles son los 10 libros con mejor puntuación de toda la plataforma,
--- mostrando el nombre del autor y su editorial?
+-- mostrando el nombre del autor, editorial, puntuación, cantidad de páginas y cantidad de puntuaciones?
 
 SELECT b.title AS titulo,
 		a.author_name AS autor,
