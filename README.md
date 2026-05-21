@@ -486,9 +486,25 @@ INNER JOIN authors a  -- Unimos a la tabla authors para traer el nombre del auto
 ON b.author_id = a.author_id 
 INNER JOIN publishers p -- Unimos a la tabla publisher para traer el nombre de la editorial
 ON b.publisher_id = p.publisher_id
-WHERE b.rating_counts > 5061 --Tomamos el percentil 75 
+WHERE b.rating_counts >= 5061 --Tomamos el percentil 75 
 ORDER BY b.avg_rating DESC
 LIMIT 10;
 ```
 ![Respuesta_1_B](/images/rta_pregunta_1_B.jpg)
 
+- 2. ¿Quiénes son los 10 autores con mejor promedio de calificación (considerando solo su libro más exitoso)?
+
+```sql
+SELECT a.author_name AS autor,
+		ROUND(AVG(b.avg_rating),2) AS promedio_puntuacion,
+		COUNT(b.bookid) AS cantidad_de_libros_top
+FROM books b
+INNER JOIN authors a
+ON b.author_id = a.author_id
+WHERE rating_counts >= 5061 --Tomamos el percentil 75
+GROUP BY a.author_name
+HAVING COUNT(b.bookid) >=1
+ORDER BY promedio_puntuacion DESC, SUM(b.rating_counts) DESC
+LIMIT 10;
+```
+![Respuesta_2](/images/rta_pregunta_2.jpg)
