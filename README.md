@@ -503,8 +503,14 @@ INNER JOIN authors a
 ON b.author_id = a.author_id
 WHERE rating_counts >= 5061 --Tomamos el percentil 75
 GROUP BY a.author_name
-HAVING COUNT(b.bookid) >=1
+HAVING COUNT(b.bookid) >=1 -- Filtramos autores que tengan al menos 2 libros en este nivel
 ORDER BY promedio_puntuacion DESC, SUM(b.rating_counts) DESC
 LIMIT 10;
 ```
 ![Respuesta_2](/images/rta_pregunta_2.jpg)
+
+Al analizar los resultados, vemos que las puntuaciones son extremadamente altas (4.7-4.8). Esto se debe al uso del percentil 75 como condición, por lo que estamos tomando solamente aquellos libros "populares".
+Si queremos obtener libros que tengan una buena puntuación pero sean pocos conocidos, formulamos otra consulta:
+
+- 3.¿Qué libros tienen una puntuación excelente (mayor a 4.3) pero son poco conocidos (tienen entre 500 y 2,000 votos)?
+
