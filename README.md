@@ -394,3 +394,40 @@ JOIN languages l ON b.language_code = l.language_code
 JOIN authors a ON a.author_name = TRIM(SPLIT_PART(b.authors, '/', 1));
 ```
 Nota: Se trabajará con las tablas anteriormente creadas.
+
+### 6. FASE 6: CREACIÓN DE CONSULTAS PARA EL ANÁLISIS DE DATOS
+
+Una vez normalizadas las bases de datos y con la creación de nuevas tablas, podemos comenzar a generar las `queries` que nos permitan dar respuesta a las siguientes preguntas:
+
+- 1.¿Cuáles son los 10 libros con mejor puntuación de toda la plataforma, mostrando el nombre del autor, su editorial, cantidad de páginas y cantidad de puntuaciones recibidas?
+
+```sql
+-- ==========================================================================================
+-- FASE 6: CONSULTAS PARA EL ANÁLISIS DE DATOS
+-- DESCRIPCIÓN: SE PRESENTAN LAS CONSULTAS QUE NOS PERMITEN REALIZAR UNA ANÁLISIS DE DATOS
+-- RESPECTO A LA BASE DE DATOS.
+-- ==========================================================================================
+
+-- 1. ¿Cuáles son los 10 libros con mejor puntuación de toda la plataforma,
+-- mostrando el nombre del autor y su editorial?
+
+SELECT b.title AS titulo,
+		a.author_name AS autor,
+		p.publisher_name AS editorial,
+		b.avg_rating AS puntuacion,
+		b.rating_counts AS cantidad_de_puntuaciones
+FROM books b
+INNER JOIN authors a -- Unimos a la tabla authors
+ON b.author_id = a.author_id
+INNER JOIN publishers p -- Unimos a la tabla publishers
+ON b.publisher_id = p.publisher_id
+ORDER BY avg_rating DESC, b.rating_counts DESC -- Se orden por puntuación y por cantidad de puntuaciones
+LIMIT 10; -- Se toman los 5 primeros registros
+
+-- El resultado devuelto es erróneo porque no se esta teniendo en cuenta la relación
+-- entre los campos 'avg_rating' y 'rating_counts'
+-- (No se puede tomar un libro con una puntuación de 5 si sólo recibió una puntuación o reseña)
+-- Se debe adoptar un criterio de análisis para definir a partir de qué cantidad de puntuaciones realizadas
+-- esta bien considerar la clasificación de un libro
+```
+El resultado de la consulta anterior es el siguiente:
