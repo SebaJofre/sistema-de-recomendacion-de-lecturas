@@ -431,3 +431,4 @@ LIMIT 10; -- Se toman los 5 primeros registros
 -- esta bien considerar la clasificación de un libro
 ```
 El resultado de la consulta anterior es el siguiente:
+![Respuesta_1_A](/images/rta_pregunta_1_A.jpg)
