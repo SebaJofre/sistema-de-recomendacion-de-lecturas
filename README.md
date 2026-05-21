@@ -503,7 +503,7 @@ INNER JOIN authors a
 ON b.author_id = a.author_id
 WHERE rating_counts >= 5061 --Tomamos el percentil 75
 GROUP BY a.author_name
-HAVING COUNT(b.bookid) >=1 -- Filtramos autores que tengan al menos 2 libros en este nivel
+HAVING COUNT(b.bookid) >=2 -- Filtramos autores que tengan al menos 2 libros en este nivel
 ORDER BY promedio_puntuacion DESC, SUM(b.rating_counts) DESC
 LIMIT 10;
 ```
@@ -514,3 +514,17 @@ Si queremos obtener libros que tengan una buena puntuación pero sean pocos cono
 
 - 3.¿Qué libros tienen una puntuación excelente (mayor a 4.3) pero son poco conocidos (tienen entre 500 y 2,000 votos)?
 
+```sql
+SELECT a.author_name AS autor,
+		ROUND(AVG(b.avg_rating),2) AS promedio_puntuacion,
+		COUNT(b.bookid) AS cantidad_de_libros_top
+FROM books b
+INNER JOIN authors a
+ON b.author_id = a.author_id
+WHERE avg_rating >= 4.3 AND rating_counts BETWEEN 500 AND 2000 --Condición de filtrado 
+GROUP BY a.author_name
+HAVING COUNT(b.bookid) >=2 -- Filtramos autores que tengan al menos 2 libros en este nivel
+ORDER BY promedio_puntuacion DESC, SUM(b.rating_counts) DESC
+LIMIT 10;
+```
+![Respuesta_3](/images/rta_pregunta_3.jpg)
