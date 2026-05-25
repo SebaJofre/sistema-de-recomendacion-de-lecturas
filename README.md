@@ -6,6 +6,9 @@
 - [OBJETIVO DEL PROYECTO](#objetivo-del-proyecto)
 - [HERRAMIENTAS UTILIZADAS](#herramientas-utilizadas)
 - [DESARROLLO](#desarrollo)
+	- [1. LIMPIEZA Y EXTRACCIÓN DE DATOS (GOOGLE SHEETS)](#1-limpieza-y-extracción-de-datos-google-sheets)
+	- [2. ARQUITECTURA, INGESTA Y GOBERNANZA DE DATOS (PostgreSQL)](#2-arquitectura-ingesta-y-gobernanza-de-datos-postgresql)
+ 	- [3. VISUALIZACIÓN DE DATOS (POWER BI)](#3-visualización-de-datos-power-bi)  
 
 ## OBJETIVO DEL PROYECTO
 Optimizar el proceso de selección de lecturas mediante un modelo de priorización basado en datos históricos, calificaciones de usuarios, cantidad de páginas y editoral.
@@ -21,7 +24,7 @@ Para este proyecto se usó:
 ### ORIGEN DE LOS DATOS
 El dataset utilizado en este proyecto fue obtenido de `Kaggle`: https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks?resource=download
 
-### 1. Limpieza y Extracción de Datos (**Google Sheets**).
+### 1. LIMPIEZA Y EXTRACCIÓN DE DATOS (**GOOGLE SHEETS**).
 
 En esta parte se procesaron los datos crudos. Se pueden consultar los datos en la carpeta [data](./data)
 
@@ -570,3 +573,5 @@ INNER JOIN authors a
 		ON b.author_id = a.author_id
 WHERE p.publisher_name = 'Andrews McMeel Publishing' AND avg_rating >= 4;
 ```
+
+### 3. VISUALIZACIÓN DE DATOS (**POWER BI**)
