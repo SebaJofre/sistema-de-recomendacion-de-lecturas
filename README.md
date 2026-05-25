@@ -1,4 +1,5 @@
 # 📚SISTEMA DE RECOMENDACIÓN DE LECTURA📚
+### ¿No sabés qué libro leer? Este sistema quizás te pueda ayudar 🤗​
 
 ## ÍNDICE DEL PROYECTO
 
@@ -401,6 +402,8 @@ Una vez normalizadas las bases de datos y con la creación de nuevas tablas, pod
 
 - 1. ¿Cuáles son los 10 libros con mejor puntuación de toda la plataforma, mostrando el nombre del autor, editorial, puntuación, cantidad de páginas y cantidad de puntuaciones?
 
+Propósito: Darle al usuario lo mejor de lo mejor de forma directa.
+
 ```sql
 -- ==========================================================================================
 -- FASE 6: CONSULTAS PARA EL ANÁLISIS DE DATOS
@@ -494,6 +497,8 @@ LIMIT 10;
 
 - 2. ¿Quiénes son los 10 autores con mejor promedio de calificación (considerando solo su libro más exitoso)?
 
+Propósito: Evitar que un solo autor famoso (como J.K. Rowling) acapare todas las recomendaciones.
+
 ```sql
 SELECT a.author_name AS autor,
 		ROUND(AVG(b.avg_rating),2) AS promedio_puntuacion,
@@ -512,7 +517,9 @@ LIMIT 10;
 Al analizar los resultados, vemos que las puntuaciones son extremadamente altas (4.7-4.8). Esto se debe al uso del percentil 75 como condición, por lo que estamos tomando solamente aquellos libros "populares".
 Si queremos obtener libros que tengan una buena puntuación pero sean pocos conocidos, formulamos otra consulta:
 
-- 3.¿Qué libros tienen una puntuación excelente (mayor a 4.3) pero son poco conocidos (tienen entre 500 y 2,000 votos)?
+- 3. ¿Qué libros tienen una puntuación excelente (mayor a 4.3) pero son poco conocidos (tienen entre 500 y 2,000 votos)?
+
+Propósito: Encontrar libros de nicho que son amados por quienes los leen, pero que no son tan comerciales.
 
 ```sql
 SELECT a.author_name AS autor,
@@ -528,3 +535,21 @@ ORDER BY promedio_puntuacion DESC, SUM(b.rating_counts) DESC
 LIMIT 10;
 ```
 ![Respuesta_3](/images/rta_pregunta_3.jpg)
+
+- 4.¿Qué editoriales han publicado la mayor cantidad de libros con una calificación superior a 4.0?
+
+Propósito: Ayudar al usuario a identificar qué editoriales suelen tener un estándar de calidad más alto.
+
+```sql
+SELECT p.publisher_name AS editorial,
+		COUNT(bookid) AS total_libros_top,
+		ROUND(AVG(b.avg_rating),2) AS nota_promedio_editorial
+FROM books b
+INNER JOIN publishers p
+	ON b.publisher_id = p.publisher_id
+WHERE b.avg_rating >= 4
+GROUP BY p.publisher_name
+HAVING COUNT(bookid) >= 10
+ORDER BY nota_promedio_editorial DESC
+LIMIT 10;
+```
