@@ -542,14 +542,15 @@ Propósito: Ayudar al usuario a identificar qué editoriales suelen tener un est
 
 ```sql
 SELECT p.publisher_name AS editorial,
-		COUNT(bookid) AS total_libros_top,
-		ROUND(AVG(b.avg_rating),2) AS nota_promedio_editorial
+		COUNT(bookid) AS total_libros_top, --Cuenta cuántas filas (libros) se agruparon por editorial
+		ROUND(AVG(b.avg_rating),2) AS nota_promedio_editorial --Calcula el promedio de notas del grupo y lo redondea a 2 decimales
 FROM books b
 INNER JOIN publishers p
 	ON b.publisher_id = p.publisher_id
-WHERE b.avg_rating >= 4
+WHERE b.avg_rating >= 4 --Solo entran al cálculo los libros que ya son buenos (+4 estrellas)
 GROUP BY p.publisher_name
-HAVING COUNT(bookid) >= 10
+HAVING COUNT(bookid) >= 10 --Descarta las editoriales que tienen menos de 10 libros en el grupo
 ORDER BY nota_promedio_editorial DESC
 LIMIT 10;
 ```
+![Respuesta_4](/images/rta_pregunta_4.jpg)
