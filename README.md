@@ -60,6 +60,8 @@ Las queries pueden ser consultadas en la carpeta [sql_queries](./sql_queries)
 - [2. Fase 2: Pipeline de ingesta masiva.](#2-fase-2-pipeline-de-ingesta-masiva)
 - [3. Fase 3: Auditoría de Calidad y Detección de anomalías.](#3-fase-3-auditoría-de-calidad-y-detección-de-anomalías)
 - [4. Fase 4: Transformación transaccional y capa de abstracción.](#4-fase-4-transformación-transaccional-y-capa-de-abstracción)
+- [5. Fase 5: Normalización y creación de nuevas tablas.](#5-fase-5-normalización-y-creación-de-nuevas-tablas)
+- [6. Fase 6: Creación de consulta para el análisis de datos.](#6-fase-6-creación-de-consultas-para-el-análisis-de-datos)
 
 ### 1. Fase 1: Definición del esquema DDL y Refactorización
 Se comienza esta fase con la creación del database `books`. Luego, se procede a la creación de la tabla `db_books`, asignando las restricciones correspondientes a cada campo.
@@ -260,7 +262,7 @@ WHERE num_pages IS NOT NULL; -- Toma la transformación realizada en la Estrateg
 ```
 Nota: Ambas soluciones permiten realizar análisis de datos mas confiables.
 
-### 5. Fase 5: NORMALIZACIÓN Y CREACIÓN DE NUEVAS TABLAS
+### 5. Fase 5: Normalización y creación de nuevas tablas.
 
 Este paso detalla la normalización de la base de datos, debido a que se detecta en el campo `authors` de la base de datos `db_books`, una gran cantidad de autores por cada registro almacena, lo que ensucia y dificulta la creación de consultas.
 
@@ -396,7 +398,7 @@ JOIN authors a ON a.author_name = TRIM(SPLIT_PART(b.authors, '/', 1));
 ```
 Nota: Se trabajará con las tablas anteriormente creadas.
 
-### 6. FASE 6: CREACIÓN DE CONSULTAS PARA EL ANÁLISIS DE DATOS
+### 6. FASE 6: Creación de consultas para el análisis de datos.
 
 Una vez normalizadas las bases de datos y con la creación de nuevas tablas, podemos comenzar a generar las `queries` que nos permitan dar respuesta a las siguientes preguntas:
 
@@ -554,3 +556,17 @@ ORDER BY nota_promedio_editorial DESC
 LIMIT 10;
 ```
 ![Respuesta_4](/images/rta_pregunta_4.jpg)
+
+La siguiente consulta le permite al usuario filtrar por una editorial específica
+```sql
+SELECT b.title AS titulo,
+		b.avg_rating AS puntuacion,
+		a.author_name AS autor,
+		p.publisher_name AS editorial
+FROM books b
+INNER JOIN publishers p
+		ON b.publisher_id = p.publisher_id
+INNER JOIN authors a
+		ON b.author_id = a.author_id
+WHERE p.publisher_name = 'Andrews McMeel Publishing' AND avg_rating >= 4;
+```
