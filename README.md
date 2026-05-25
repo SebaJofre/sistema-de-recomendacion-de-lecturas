@@ -398,7 +398,7 @@ JOIN authors a ON a.author_name = TRIM(SPLIT_PART(b.authors, '/', 1));
 ```
 Nota: Se trabajará con las tablas anteriormente creadas.
 
-### 6. FASE 6: Creación de consultas para el análisis de datos.
+### 6. Fase 6: Creación de consultas para el análisis de datos.
 
 Una vez normalizadas las bases de datos y con la creación de nuevas tablas, podemos comenzar a generar las `queries` que nos permitan dar respuesta a las siguientes preguntas:
 
