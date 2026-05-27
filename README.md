@@ -575,3 +575,17 @@ WHERE p.publisher_name = 'Andrews McMeel Publishing' AND avg_rating >= 4;
 ```
 
 ### 3. VISUALIZACIÓN DE DATOS (**POWER BI**)
+
+El proyecto continua con el uso de Power BI para lograr crear un Tablero que le permita al usuario obtener la información más relevante de la base de datos.
+
+Lo primero en realizar es la conexión a la ´Base de datos PostgreSQL´. Realizamos la correspondiente conexión a la misma e importamos la base de datos. 
+Luego se eligen las columnas ´books´,´authors´, ´languages´ y ´publishers´. Se accede a ´Power Query´ para la transformación de datos, en caso de ser necesario. 
+Las campos que se modificaron son: ´bookid´, ´author_id´, ´language_id´ y ´publisher_id´. Los mismos tenia tipo de dato ´numeric´ y se lo cambia a ´text´.
+
+Ahora con las tablas transformadas, creamos las relaciones entre las mismas.
+![Vista del Modelo](/images/vista_del_modelo.jpg)
+
+Se muestra el siguiente ejemplo de la relación entre las tablas ´books´ y ´authors´.
+![Relación book-authors](/images/relacion_authors.jpg)
+
+
