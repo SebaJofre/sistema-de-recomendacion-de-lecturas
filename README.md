@@ -639,6 +639,7 @@ FORMAT(
 #### DASHBOARD EXPLORADOR DE LIBROS.
 
 ![Dashboard books](/images/dashboard_books.jpg)
+Puedes ver el dashboard en: [Dashboard books](power_bi/dashboard_books.tmdl).
 
 El usuario puede interactuar con el dashboard para buscar su próxima lectura.
 El dashboard esta compuesto de:
