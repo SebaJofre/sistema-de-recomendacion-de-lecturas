@@ -638,5 +638,5 @@ FORMAT(
 
 ### DASHBOARD EXPLORADOR DE LIBROS.
 
-![Dashboard](/images/dashboar_books.jpg)
+![Dashboard books](/images/dashboard_books.jpg)
 
