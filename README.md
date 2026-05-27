@@ -642,9 +642,9 @@ FORMAT(
 
 El usuario puede interactuar con el dashboard para buscar su próxima lectura.
 El dashboard esta compuesto de:
-- • 4 tarjetas: Libros, Autores, Editoriales e Idiomas. Las mismas muestran cantidades.
-- • 6 segmentadores de datos: Título, Autores, Idiomas, Editoriales, Año y Puntaje. El usuario podrá ir modificando estas según lo que esta buscando.
-- • 2 gráficos: uno de columnas agrupadas y otro de dispersión. El primero muestra el top 5 de los mejores libros, cuyo filtro principal es `rating_counts`>5061 (Percentil 75). El segundo muestra la relación de Popularidad vs Calidad, el mismo tiene dos limitaciones:
+- 4 tarjetas: Libros, Autores, Editoriales e Idiomas. Las mismas muestran cantidades.
+- 6 segmentadores de datos: Título, Autores, Idiomas, Editoriales, Año y Puntaje. El usuario podrá ir modificando estas según lo que esta buscando.
+- 2 gráficos: uno de columnas agrupadas y otro de dispersión. El primero muestra el top 5 de los mejores libros, cuyo filtro principal es `rating_counts`>5061 (Percentil 75). El segundo muestra la relación de Popularidad vs Calidad, el mismo tiene dos limitaciones:
   1. Se toman las puntuaciones menores a 1 millón para eliminar aquellos libros populares
   2. Se toma una puntuación entre 3 y 5 puntos.
-- • Una tabla con la información completa por título, autor, editorial, puntaje, páginas y puntuaciones. Esto le permite al usuario obtener información completa de cada uno de los libros que contiene la base de datos.
+- Una tabla con la información completa por título, autor, editorial, puntaje, páginas y puntuaciones. Esto le permite al usuario obtener información completa de cada uno de los libros que contiene la base de datos.
