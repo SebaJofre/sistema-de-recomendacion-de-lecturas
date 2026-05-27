@@ -597,21 +597,27 @@ Se muestra el siguiente ejemplo de la relación entre las tablas ´books´ y ´a
 #### 1. Total de Autores.
 El propósito de `Total_Autores` es mostrar cuántos escritores diferentes existen en la base de datos actual, asegurándose de que el número sea fácil de leer (con separadores de miles) y que no cuente dos veces al mismo autor si tiene varios libros.
 
-```dax
-Total_Autores = 
-FORMAT(  						--Toma el número resultante del conteo y lo convierte en una cadena de texto con un formato específico.
-    DISTINCTCOUNT('books'[author_id]), --Recorre la columna author_id y cuenta cuántos valores únicos encuentra.
-    "#,##0" -- Formato específico
+```sql
+Total_Autores =
+--Toma el número resultante del conteo y lo convierte en una cadena de texto con un formato específico
+FORMAT(
+	--Recorre la columna author_id y cuenta cuántos valores únicos encuentra  						
+    DISTINCTCOUNT('books'[author_id]),
+	-- Formato específico con separador de miles
+    "#,##0" 
 )
 ```
 #### 2. Total de Editoriales.
 El propósito de `Total_Editoriales` es cuantificar cuántas editoriales diferentes han publicado los libros en la base de datos.
 
-```dax
+```sql
 Total_Editoriales = 
-FORMAT(							--Toma el número resultante del conteo y lo convierte en una cadena de texto con un formato específico.
-    DISTINCTCOUNT('books'[publisher_id]), --Recorre la columna publisher_id y cuenta cuántos valores únicos encuentra.
-    "#,##0" -- Formato específico
+--Toma el número resultante del conteo y lo convierte en una cadena de texto con un formato específico
+FORMAT(
+	--Recorre la columna publisher_id y cuenta cuántos valores únicos encuentra				
+    DISTINCTCOUNT('books'[publisher_id]),
+	-- Formato específico con separador de miles
+    "#,##0"
 )
 ```
 
