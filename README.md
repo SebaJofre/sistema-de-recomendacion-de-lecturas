@@ -634,3 +634,9 @@ FORMAT(
     "#,##0"
 )
 ```
+**Nota**: Se crea una tabla/carpeta para almacenar las medidas creadas
+
+### DASHBOARD EXPLORADOR DE LIBROS.
+
+![Dashboard](/images/dashboar_books.jpg)
+
