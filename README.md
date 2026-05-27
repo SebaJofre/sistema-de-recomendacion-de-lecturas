@@ -588,11 +588,7 @@ Ahora con las tablas transformadas, creamos las relaciones entre las mismas.
 Se muestra el siguiente ejemplo de la relación entre las tablas ´books´ y ´authors´.
 ![Relación book-authors](/images/relacion_authors.jpg)
 
-### Medidas del Proyecto
-#### Funciones utilizadas:
-`FORMAT`: Convierte un valor (número o fecha) en un texto con un estilo específico
-`DISTINCTCOUNT`: sirve para contar elementos únicos en una columna, ignorando las repeticiones.
-``
+### Medidas del Proyecto.
 
 #### 1. Total de Autores.
 El propósito de `Total_Autores` es mostrar cuántos escritores diferentes existen en la base de datos actual, asegurándose de que el número sea fácil de leer (con separadores de miles) y que no cuente dos veces al mismo autor si tiene varios libros.
@@ -620,4 +616,21 @@ FORMAT(
     "#,##0"
 )
 ```
+#### 3. Total de Idiomas.
+El propósito de `Total_Idiomas` es contar cuántos idiomas únicos existen en las base de datos.
 
+```sql
+Total_Idiomas = 
+DISTINCTCOUNT(books[language_id])
+```
+
+#### 4. Total de Libros.
+El propósito de `Total_Libros` es mostrar la cantidad total de títulos disponibles en la base de datos.
+
+```sql
+Total_Libros = 
+FORMAT(
+    COUNTROWS('books'), 
+    "#,##0"
+)
+```
