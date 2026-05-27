@@ -589,17 +589,29 @@ Se muestra el siguiente ejemplo de la relación entre las tablas ´books´ y ´a
 ![Relación book-authors](/images/relacion_authors.jpg)
 
 ### Medidas del Proyecto
+#### Funciones utilizadas:
+`FORMAT`: Convierte un valor (número o fecha) en un texto con un estilo específico
+`DISTINCTCOUNT`: sirve para contar elementos únicos en una columna, ignorando las repeticiones.
+``
 
 #### 1. Total de Autores.
-Esta medida calcula el total de únicos autores. 
+El propósito de `Total_Autores` es mostrar cuántos escritores diferentes existen en la base de datos actual, asegurándose de que el número sea fácil de leer (con separadores de miles) y que no cuente dos veces al mismo autor si tiene varios libros.
+
 ```dax
 Total_Autores = 
--- FORMAT convierte un valor (número o fecha) en un texto con un estilo específico (En este caso "#,###0")
-FORMAT( 
-    DISTINCTCOUNT('books'[author_id]), -- DISTINCTCOUNT sirve para contar elementos únicos en una columna, ignorando las repeticiones.
-    "#,##0"
+FORMAT(  						--Toma el número resultante del conteo y lo convierte en una cadena de texto con un formato específico.
+    DISTINCTCOUNT('books'[author_id]), --Recorre la columna author_id y cuenta cuántos valores únicos encuentra.
+    "#,##0" -- Formato específico
 )
 ```
 #### 2. Total de Editoriales.
+El propósito de `Total_Editoriales` es cuantificar cuántas editoriales diferentes han publicado los libros en la base de datos.
 
+```dax
+Total_Editoriales = 
+FORMAT(							--Toma el número resultante del conteo y lo convierte en una cadena de texto con un formato específico.
+    DISTINCTCOUNT('books'[publisher_id]), --Recorre la columna publisher_id y cuenta cuántos valores únicos encuentra.
+    "#,##0" -- Formato específico
+)
+```
 
