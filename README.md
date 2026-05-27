@@ -578,14 +578,28 @@ WHERE p.publisher_name = 'Andrews McMeel Publishing' AND avg_rating >= 4;
 
 El proyecto continua con el uso de Power BI para lograr crear un Tablero que le permita al usuario obtener la información más relevante de la base de datos.
 
-Lo primero en realizar es la conexión a la ´Base de datos PostgreSQL´. Realizamos la correspondiente conexión a la misma e importamos la base de datos. 
-Luego se eligen las columnas ´books´,´authors´, ´languages´ y ´publishers´. Se accede a ´Power Query´ para la transformación de datos, en caso de ser necesario. 
-Las campos que se modificaron son: ´bookid´, ´author_id´, ´language_id´ y ´publisher_id´. Los mismos tenia tipo de dato ´numeric´ y se lo cambia a ´text´.
+Lo primero en realizar es la conexión a la `Base de datos PostgreSQL`. Realizamos la correspondiente conexión a la misma e importamos la base de datos. 
+Luego se eligen las columnas `books`,`authors`, `languages` y `publishers`. Se accede a `Power Query` para la transformación de datos, en caso de ser necesario. 
+Las campos que se modificaron son: `bookid`, `author_id`, `language_id` y `publisher_id`. Los mismos tenia tipo de dato `numeric` y se lo cambia a `text`.
 
 Ahora con las tablas transformadas, creamos las relaciones entre las mismas.
 ![Vista del Modelo](/images/vista_del_modelo.jpg)
 
 Se muestra el siguiente ejemplo de la relación entre las tablas ´books´ y ´authors´.
 ![Relación book-authors](/images/relacion_authors.jpg)
+
+### Medidas del Proyecto
+
+#### 1. Total de Autores.
+Esta medida calcula el total de únicos autores. 
+```dax
+Total_Autores = 
+-- FORMAT convierte un valor (número o fecha) en un texto con un estilo específico (En este caso "#,###0")
+FORMAT( 
+    DISTINCTCOUNT('books'[author_id]), -- DISTINCTCOUNT sirve para contar elementos únicos en una columna, ignorando las repeticiones.
+    "#,##0"
+)
+```
+#### 2. Total de Editoriales.
 
 
