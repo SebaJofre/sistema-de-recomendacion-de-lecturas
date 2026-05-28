@@ -582,7 +582,7 @@ WHERE p.publisher_name = 'Andrews McMeel Publishing' AND avg_rating >= 4;
 
 ### 3. VISUALIZACIÓN DE DATOS (**POWER BI**)
 
-El proyecto continua con el uso de Power BI para lograr crear un Tablero que le permita al usuario obtener la información más relevante de la base de datos.
+El proyecto continua con el uso de `Power BI` para lograr crear un `dashboard` que le permita al usuario obtener la información más relevante de la base de datos y filtrar en base a los criterios que decida.
 
 Puedes ver el dashboard en: [Dashboard books](power_bi/dashboard_books.pbix).
 
