@@ -249,7 +249,7 @@ Se realiza una verificación final de la solución implementada para asegurarse 
 
 ![Query_2](images/query_2.jpg)
 
-La segunda solución consiste en la creación de una `vista` que aisla por completo los registros sin datos (`null`). Esto permite tomar esta base de datos para poder realizar reportes limpios.
+La segunda solución consiste en la creación de una `VIEW` que aisla por completo los registros sin datos (`null`). Esto permite tomar esta base de datos para poder realizar reportes limpios.
 
 ```sql
 CREATE VIEW vista_db_books AS 
@@ -273,7 +273,7 @@ Nota: Ambas soluciones permiten realizar análisis de datos mas confiables.
 
 ### 5. Fase 5: Normalización y creación de nuevas tablas.
 
-Este paso detalla la normalización de la base de datos, debido a que se detecta en el campo `authors` de la base de datos `db_books`, una gran cantidad de autores por cada registro almacena, lo que ensucia y dificulta la creación de consultas.
+Este paso detalla la normalización de la base de datos, debido a que se detecta en el campo `authors` de la base de datos `db_books`, una gran cantidad de autores por registro, lo que ensucia y dificulta la creación de consultas.
 
 ```sql
 SELECT DISTINCT(authors)
@@ -455,7 +455,7 @@ Para poder trabajar con un valor confiable se procede a implementar cálculos es
 -- QUERIES PARA CÁLCULOS ESTADÍSTICOS (FUNCIONES DE AGREGACIÓN ORDENADA)
 -- =================================================================================
 
--- QUERY 1: CÁLCULO DEL MIN, MAX Y AVG DE rating_counts 
+-- QUERY 1: CÁLCULO DEL MIN Y MAX DE rating_counts 
 
 SELECT 
 	-- 1. Mínima puntuación
