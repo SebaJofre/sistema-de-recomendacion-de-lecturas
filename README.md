@@ -11,7 +11,7 @@
  	- [3. VISUALIZACIÓN DE DATOS (POWER BI)](#3-visualización-de-datos-power-bi)  
 
 ## OBJETIVO DEL PROYECTO
-Optimizar el proceso de selección de lecturas mediante un modelo de priorización basado en datos históricos, calificaciones de usuarios, cantidad de páginas y editoral.
+Optimizar el proceso de selección de lecturas mediante un modelo de priorización basado en datos históricos, calificaciones de usuarios, cantidad de páginas autores y editoriales.
 
 ## HERRAMIENTAS UTILIZADAS
 Para este proyecto se usó:
@@ -31,26 +31,27 @@ En esta parte se procesaron los datos crudos. Se pueden consultar los datos en l
 Tras analizar la base de datos, se han identificado diversos errores que afectan la integridad de los datos. El problema principal radica en una desalineación de columnas en ciertos registros, además de fechas con días inexistentes.
 
 1. Se corrigen 4 registros donde el contenido de las celdas se desplazó hacia la derecha (0.035% del total de la muestra).
-2. Se corrigen 2 registros que que contienen errores en la columna "publication" ya que las mismas tienen datos de fechas que no existen en el calendario (0.017% del total de la muestra)
+2. Se corrigen 2 registros que contienen errores en la columna `publication`, ya que las mismas tienen datos de fechas que no existen en el calendario (0.017% del total de la muestra)
 3. Una vez corregidos los registros anteriores se analizan los campos restantes en busca de datos nulos, repetidos o vacíos:
-- **IDs y ISBNs**: Una vez descartadas las filas malformadas (que generaban falsos duplicados), no se encontraron bookID o isbn13 repetidos.
+- **IDs y ISBNs**: Una vez descartadas las filas con errores (que generaban falsos duplicados), no se encontraron `bookID` o `isbn13` repetidos.
 - **Valores Faltantes**: No se detectaron celdas vacías o con espacios en blanco en las columnas principales (A a L), a excepción de la columna extra creada por el error de alineación.
 - **Ratings**: No se encontraron calificaciones mayores a 5 o menores a 0 en los datos correctamente alineados.
 - **Páginas**: No se detectaron libros con número de páginas negativo.
 4. Se procede a definir los tipo de datos de cada campo:
-  - bookID: `TEXT`
-  - title	authors: `TEXT`
-  - average_rating: `NUMBER`
-  - isbn: `TEXT`
-  - isbn13: `TEXT`
-  - language_code: `TEXT`
-  - num_pages: `NUMBER`
-  - ratings_count: `NUMBER`
-  - text_reviews_count: `NUMBER`
-  - publication_date: `DATE` (FORMATO: AAAA-MM-DD)
-  - publisher; `TEXT`
+  - **bookID:** `TEXT`
+  - **title:** `TEXT`
+  - **authors:** `TEXT`
+  - **average_rating:** `NUMBER`
+  - **isbn:** `TEXT`
+  - **isbn13:** `TEXT`
+  - **language_code:** `TEXT`
+  - **num_pages:** `NUMBER`
+  - **ratings_count:** `NUMBER`
+  - **text_reviews_count:** `NUMBER`
+  - **publication_date:** `DATE` (FORMATO: AAAA-MM-DD)
+  - **publisher:** `TEXT`
 
-  Se guarda el archivo en formato `.csv` para luego trabajarlo en PostgreSQL
+  Se guarda el archivo en formato `.csv` para luego trabajarlo en `PostgreSQL`
 
   ### 2. ARQUITECTURA, INGESTA Y GOBERNANZA DE DATOS (**PostgreSQL**).
 
