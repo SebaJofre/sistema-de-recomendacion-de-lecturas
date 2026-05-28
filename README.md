@@ -73,7 +73,7 @@ Al definir la estructura inicial, se establecieron restricciones estándar como 
 
 *Error:* Durante las importaciones del dataset, el pipeline colapsó debido al desbordamiento de longitud de caracteres. El dataset contenía listas extensas de coautores y nombres de editoriales complejas que superaban los límites previstos.
 
-*Solución:* Se aplica una reingeniería de esquema mendiante la sentencia `ALTER TABLE`, modificando los campos a tipo `TEXT`. Esto elima el límite arbitrario de caracteres, optimiza la gestión de almacenamiento dinámico de PostgreSQL y blinda el pipeline contra futuras cargas de datos variables.
+*Solución:* Se aplica una reingeniería de esquema mendiante la sentencia `ALTER TABLE`, modificando los campos a tipo `TEXT`. Esto elima el límite arbitrario de caracteres, optimiza la gestión de almacenamiento dinámico de `PostgreSQL` y blinda el pipeline contra futuras cargas de datos variables.
 
 ```sql
 -- ==========================================================================================
@@ -118,7 +118,7 @@ Luego del arreglo del error mencionado en la fase 1, se procede a la carga del d
 
 Para la carga del conjunto de datos preprocesado en Google Sheets, se optó por una estrategia de carga masiva integrada (`Bulk Load`) aprovechando la arquitectura local del servidor de base de datos. 
 
-Al encontrarse el archivo `.csv` limpio y el motor PostgreSQL en el mismo entorno de desarrollo local, el uso del comando nativo `COPY` representa la solución óptima y de mayor velocidad de procesamiento, evitando la sobrecarga de transferencias por red o inserciones línea por línea (`INSERT INTO`)
+Al encontrarse el archivo `.csv` limpio y el motor `PostgreSQL` en el mismo entorno de desarrollo local, el uso del comando nativo `COPY` representa la solución óptima y de mayor velocidad de procesamiento, evitando la sobrecarga de transferencias por red o inserciones línea por línea (`INSERT INTO`).
 
 ```sql
 -- ==========================================================================================
@@ -143,7 +143,7 @@ COPY db_books (
     publication_date, 
     publisher
 )
-FROM 'G:/My Drive/Data Analysis/Portfolio/Proyecto 1 - Books/Dataset/books_clean.csv'
+FROM 'G:/My Drive/Data Analysis/Portfolio/Proyecto 1 - Books/Dataset/books_clean.csv' -- Modificar en base a la ruta donde se almacena el archivo .csv
 WITH (
     FORMAT CSV, 
     HEADER true, 
@@ -166,9 +166,14 @@ Se procede a realizar una auditoría de calidad de la base de datos para determi
 -- 1. Verificación del volumen de ingesta: asegura que el volumen total de filas coincida
 -- con el archivo fuente.
 
-SELECT COUNT(*) AS null_rating_counts
+SELECT COUNT(*)
+FROM db_books;
+-- El total de registros (11.123) coincide con el archivo fuente
+
+-- Controlamos cuántos registros (libros) no han recibido puntuaciones
+SELECT *
 FROM db_books
-WHERE rating_counts IS NULL;
+WHERE rating_counts <= 0;
 
 -- 2. Detección de valores atípicos estructurales: identifica filas potencialmente dañadas
 -- (por ejemplo: cantidad de páginas negativas).
@@ -178,7 +183,7 @@ SELECT
 	MAX(num_pages) AS max_page_count,
 	AVG(num_pages) AS avg_page_count
 FROM db_books;
-
+-- Se encuentran registros con un minino de páginas = 0.
 -- Se determina la cantidad de registros con num_pages = 0 (Un total de 76 registros)
 SELECT COUNT(*)
 FROM db_books
