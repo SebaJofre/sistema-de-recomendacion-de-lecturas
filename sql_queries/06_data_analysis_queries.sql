@@ -30,7 +30,7 @@ LIMIT 10; -- Se toman los 5 primeros registros
 -- QUERIES PARA CÁLCULOS ESTADÍSTICOS (FUNCIONES DE AGREGACIÓN ORDENADA)
 -- =================================================================================
 
--- QUERY 1: CÁLCULO DEL MIN, MAX Y AVG DE rating_counts 
+-- QUERY 1: CÁLCULO DEL MIN Y MAX DE rating_counts 
 
 SELECT 
 	-- 1. Mínima puntuación
