@@ -7,9 +7,14 @@
 -- 1. Verificación del volumen de ingesta: asegura que el volumen total de filas coincida
 -- con el archivo fuente.
 
-SELECT COUNT(*) AS null_rating_counts
+SELECT COUNT(*)
+FROM db_books;
+-- El total de registros (11.123) coincide con el archivo fuente
+
+-- Controlamos cuántos registros (libros) no han recibido puntuaciones
+SELECT *
 FROM db_books
-WHERE rating_counts IS NULL;
+WHERE rating_counts <= 0;
 
 -- 2. Detección de valores atípicos estructurales: identifica filas potencialmente dañadas
 -- (por ejemplo: cantidad de páginas negativas).
