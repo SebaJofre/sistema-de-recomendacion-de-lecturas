@@ -1,5 +1,5 @@
-# 📚SISTEMA DE RECOMENDACIÓN DE LECTURA📚
-### ¿No sabés qué libro leer? Este sistema quizás te pueda ayudar 🤗​
+# 🔎​📚SISTEMA DE RECOMENDACIÓN DE LECTURA📚🔎​
+### ¿No sabés qué libro leer? Este sistema quizás te pueda ayudar🤗​
 
 ## ÍNDICE DEL PROYECTO
 
@@ -586,7 +586,7 @@ El proyecto continua con el uso de `Power BI` para lograr crear un `dashboard` q
 
 Puedes ver el dashboard en: [Dashboard books](power_bi/dashboard_books.pbix).
 
-Lo primero en realizar es la conexión a la `Base de datos PostgreSQL`. Realizamos la correspondiente conexión a la misma e importamos la base de datos. 
+Lo primero a realizar es la conexión a la `Base de datos PostgreSQL`. Realizamos la correspondiente conexión a la misma e importamos la base de datos. 
 Luego se eligen las columnas `books`,`authors`, `languages` y `publishers`. Se accede a `Power Query` para la transformación de datos, en caso de ser necesario. 
 Las campos que se modificaron son: `bookid`, `author_id`, `language_id` y `publisher_id`. Los mismos tenia tipo de dato `numeric` y se lo cambia a `text`.
 
@@ -648,8 +648,8 @@ FORMAT(
 
 ![Dashboard books](/images/dashboard_books.jpg)
 
-
 El usuario puede interactuar con el dashboard para buscar su próxima lectura.
+
 El dashboard esta compuesto de:
 - 4 tarjetas: Libros, Autores, Editoriales e Idiomas. Las mismas muestran cantidades.
 - 6 segmentadores de datos: Título, Autores, Idiomas, Editoriales, Año y Puntaje. El usuario podrá ir modificando estas según lo que esta buscando.
@@ -657,3 +657,7 @@ El dashboard esta compuesto de:
   1. Se toman las puntuaciones menores a 1 millón para eliminar aquellos libros populares
   2. Se toma una puntuación entre 3 y 5 puntos.
 - Una tabla con la información completa por título, autor, editorial, puntaje, páginas y puntuaciones. Esto le permite al usuario obtener información completa de cada uno de los libros que contiene la base de datos.
+
+Espero que te resulte útil este sistema, que puedas encontrar tu próxima lectura y que la disfrutes!📖​🙌​
+
+Gracias por tomarte el tiempo y si tienes alguna recomendación o idea que pueda servirme para mejorar mis habilidades técnicas o de análisis, son bien recibidas.🤗​😀​
